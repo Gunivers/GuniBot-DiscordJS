@@ -50,7 +50,7 @@ bot.on('message', message => {
         "fields": [
           {
             "name": "Information",
-            "value": "(FR) **Bienvenue sur Gunivers," + " " + member.user.username +  "\n!**Pour commencer, entre la commande " + '"__/fr__"' + " afin de voir les salons français. Ensuite, merci de lire ce qui se trouve dans le salon #Information-fr.\n\n(EN) **Welcome to Gunivers, " + member.user.username  + " !\n**Plz, enter the command " + '"__/en__"' + " to see all english channels. Then, thanks to read the #Information-en channel.**H A V E   F U N   !**   :wink:"
+            "value": "(FR) **Bienvenue sur Gunivers," + " " + member.user.username +  "\n!**Pour commencer, entre la commande " + '"__/fr__"' + " afin de voir les salons français. Ensuite, merci de lire ce qui se trouve dans le salon #Information-fr.\n\n(EN) **Welcome to Gunivers, " + member.user.username  + " !\n**Plz, enter the command " + '"__/en__"' + " to see all english channels. Then, thanks to read the #Information-en channel.\n\n**H A V E   F U N   !**   :wink:"
           }
         ]
       };
