@@ -40,7 +40,7 @@ bot.on('message', message => {
 });
 
   bot.on('guildMemberAdd', member => {
-    member.addRole('356220216084004897').catch(console.error);
+    member.addRole('379321622810722305').catch(console.error);
     member.createDM().then(channel => {
       const embed = {
         "color": 0xFF6400,

@@ -13,10 +13,10 @@ exports.run = (bot, message) => {
       message.channel.send({ embed });
       }
   
-      if(message.member.roles.has('136196804571168769')) {
+      if(message.member.roles.has('379318678841458699')) {
       const muteMember = message.mentions.members.first();
           const member = message.mentions.members.first();
-          member.addRole('356220216084004897').catch(console.error);
+          member.addRole('379321622810722305').catch(console.error);
           const embed = {
             "color": 0xFF6400,
             "fields": [
@@ -29,10 +29,10 @@ exports.run = (bot, message) => {
         message.channel.send({ embed });
       var channel = bot.channels.find("name", "staff");
       channel.send(muteMember + " a été kick par " + message.author )
-      } else if(message.member.roles.has('335451639387258882')) { 
+      } else if(message.member.roles.has('379318942927421442')) { 
         const muteMember = message.mentions.members.first();
         const member = message.mentions.members.first();
-        member.addRole('356220216084004897').catch(console.error);
+        member.addRole('379321622810722305').catch(console.error);
         const embed = {
           "color": 0xFF6400,
           "fields": [

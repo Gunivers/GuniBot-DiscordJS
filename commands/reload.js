@@ -1,5 +1,5 @@
 exports.run = (bot, message, args, member) => {
-  if(message.member.roles.has('136196804571168769')) {
+  if(message.member.roles.has('379318678841458699')) {
     if(!args || args.size < 1){
       const embed = {
         "color": 0xFF6400,
@@ -23,7 +23,7 @@ exports.run = (bot, message, args, member) => {
       ]
   };
   message.channel.send({ embed });
-  } else if(message.member.roles.has('335451639387258882')) {
+  } else if(message.member.roles.has('379318942927421442')) {
     if(!args || args.size < 1){
       const embed = {
         "color": 0xFF6400,

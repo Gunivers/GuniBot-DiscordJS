@@ -1,6 +1,6 @@
 exports.run = (bot, message, args) =>  {
 
-  if(message.member.roles.has('136196804571168769')) {
+  if(message.member.roles.has('379318678841458699')) {
     let messagecount = parseInt(args);
 
     if(!messagecount || messagecount < 2 || messagecount > 100){
@@ -18,7 +18,7 @@ exports.run = (bot, message, args) =>  {
     if(messagecount || messagecount < 2 || messagecount > 100){
     message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
     }
-} else if(message.member.roles.has('335451639387258882')) {
+} else if(message.member.roles.has('379318942927421442')) {
   let messagecount = parseInt(args);
 
   if(!messagecount || messagecount < 2 || messagecount > 100){

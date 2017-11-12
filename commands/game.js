@@ -1,7 +1,7 @@
-exports.run = (bot, message, args, member) => {
+exports.run = (bot, message, args, member, Admin) => {
     let text = args.join(" ");
 
-    if (!message.member.roles.has('136196804571168769')){
+    if (!message.member.roles.has('379318678841458699')){
     const embed = {
         "color": 0xFF6400,
         "fields": [
@@ -14,7 +14,7 @@ exports.run = (bot, message, args, member) => {
     message.channel.send({ embed });
 }
 
-    if (message.member.roles.has('136196804571168769')){
+    if (message.member.roles.has('379318678841458699')){
     bot.user.setPresence({ game: { name: text}})
     const embed = {
         "color": 0xFF6400,

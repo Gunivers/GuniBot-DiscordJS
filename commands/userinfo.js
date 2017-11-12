@@ -6,7 +6,8 @@ const status = {
   };
 
   exports.run = (bot, message, args, Discord) => {
-    const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;const avatar = member.user.avatarURL
+    const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
+    const avatar = member.user.avatarURL
     let desc
     if(member.user.id === '136176639175426048' ) {
         desc = "Il parrait que c'est un dieu";

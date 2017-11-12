@@ -4,7 +4,7 @@ exports.run = (bot, message, [mention, ...reason]) => {
       return message.reply("Please mention a user to kick");
     }
 
-    if(message.member.roles.has('136196804571168769')) {
+    if(message.member.roles.has('379318678841458699')) {
     const kickMember = message.mentions.members.first();
     kickMember.kick();
     const embed = {
@@ -19,7 +19,7 @@ exports.run = (bot, message, [mention, ...reason]) => {
   message.channel.send({ embed });
     var channel = bot.channels.find("name", "staff");
     channel.send(kickMember + " a été kick par " + message.author )
-    } else if(message.member.roles.has('335451639387258882')) {
+    } else if(message.member.roles.has('379318942927421442')) {
       const kickMember = message.mentions.members.first();
       kickMember.kick();
       const embed = {
