@@ -1,3 +1,12 @@
 exports.run = (bot, message, args) => {
-message.channel.send("J'ai un ping de : `" + bot.ping + " ms`");
+const embed = {
+    "color": 0xFF6400,
+    "fields": [
+        {
+            "name": "Information",
+            "value": "j'ai un ping de " + bot.ping + " ms"
+        }
+    ]
+};
+message.channel.send({ embed });
 }

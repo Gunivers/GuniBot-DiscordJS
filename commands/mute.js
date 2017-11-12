@@ -8,17 +8,44 @@ exports.run = (bot, message) => {
     const muteMember = message.mentions.members.first();
         const member = message.mentions.members.first();
         member.removeRole('356220216084004897').catch(console.error);
-    message.reply(`${muteMember} a été mute.`)
+        const embed = {
+            "color": 0xFF6400,
+            "fields": [
+                {
+                    "name": "Information",
+                    "value": muteMember + " a bien été mute"
+                }
+            ]
+        };
+        message.channel.send({ embed });
     var channel = bot.channels.find("name", "staff");
-    channel.send(`${muteMember} a été mute par ` + message.author);
+    channel.send(muteMember + " a été kick par " + message.author )
     } else if(message.member.roles.has('335451639387258882')) { 
       const muteMember = message.mentions.members.first();
       const member = message.mentions.members.first();
       member.removeRole('356220216084004897').catch(console.error);
-  message.reply(`${muteMember} a été mute.`)
+      const embed = {
+        "color": 0xFF6400,
+        "fields": [
+            {
+                "name": "Information",
+                "value": muteMember +" a bien été mute."
+            }
+        ]
+    };
+    message.channel.send({ embed });
   var channel = bot.channels.find("name", "staff");
-  channel.send(`${muteMember} a été mute par ` + message.author);
+  channel.send(muteMember + " a été kick par " + message.author )
   } else {
-    message.reply("You can't use this command.");
+    const embed = {
+        "color": 0xFF6400,
+        "fields": [
+            {
+                "name": "Information",
+                "value": "Tu n'a pas la perm d'utiliser cette commande"
+            }
+        ]
+    };
+    message.channel.send({ embed });
     }
 }
