@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const config = require("./config.json")
+const role = require("./commands/role.json")
 
 var bot = new Discord.Client()
 
@@ -21,6 +22,7 @@ bot.on('message', message => {
   const command = args.shift().toLowerCase();
 
 
+
   if (message.channel.type == 'dm') {
     return;
   }
@@ -40,7 +42,7 @@ bot.on('message', message => {
 });
 
   bot.on('guildMemberAdd', member => {
-    member.addRole('379321622810722305').catch(console.error);
+    member.addRole(role.membre).catch(console.error);
     member.createDM().then(channel => {
       const embed = {
         "color": 0xFF6400,

@@ -1,5 +1,7 @@
+const role = require('./role.json')
+
 exports.run = (bot, message, args, member) => {
-  if(message.member.roles.has('379318678841458699')) {
+  if(message.member.roles.has(role.admin)) {
     if(!args || args.size < 1){
       const embed = {
         "color": 0xFF6400,
@@ -23,7 +25,7 @@ exports.run = (bot, message, args, member) => {
       ]
   };
   message.channel.send({ embed });
-  } else if(message.member.roles.has('379318942927421442')) {
+  } else if(message.member.roles.has(role.modo)) {
     if(!args || args.size < 1){
       const embed = {
         "color": 0xFF6400,

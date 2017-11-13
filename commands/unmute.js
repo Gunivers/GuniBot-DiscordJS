@@ -1,3 +1,5 @@
+const role = require('./role.json')
+
 exports.run = (bot, message) => {
   
        if (message.mentions.users.size === 0) {
@@ -13,10 +15,10 @@ exports.run = (bot, message) => {
       message.channel.send({ embed });
       }
   
-      if(message.member.roles.has('379318678841458699')) {
+      if(message.member.roles.has(role.admin)) {
       const muteMember = message.mentions.members.first();
           const member = message.mentions.members.first();
-          member.addRole('379321622810722305').catch(console.error);
+          member.addRole(role.membre).catch(console.error);
           const embed = {
             "color": 0xFF6400,
             "fields": [
@@ -29,10 +31,10 @@ exports.run = (bot, message) => {
         message.channel.send({ embed });
       var channel = bot.channels.find("name", "staff");
       channel.send(muteMember + " a été kick par " + message.author )
-      } else if(message.member.roles.has('379318942927421442')) { 
+      } else if(message.member.roles.has(role.modo)) { 
         const muteMember = message.mentions.members.first();
         const member = message.mentions.members.first();
-        member.addRole('379321622810722305').catch(console.error);
+        member.addRole(role.membre).catch(console.error);
         const embed = {
           "color": 0xFF6400,
           "fields": [

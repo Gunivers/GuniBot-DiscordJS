@@ -1,10 +1,12 @@
+const role = require('./role.json')
+
 exports.run = (bot, message, [mention, ...reason]) => {
   
     if (message.mentions.users.size === 0) {
       return message.reply("Please mention a user to kick");
     }
 
-    if(message.member.roles.has('379318678841458699')) {
+    if(message.member.roles.has(role.admin)) {
     const kickMember = message.mentions.members.first();
     kickMember.kick();
     const embed = {
@@ -19,7 +21,7 @@ exports.run = (bot, message, [mention, ...reason]) => {
   message.channel.send({ embed });
     var channel = bot.channels.find("name", "staff");
     channel.send(kickMember + " a été kick par " + message.author )
-    } else if(message.member.roles.has('379318942927421442')) {
+    } else if(message.member.roles.has(role.modo)) {
       const kickMember = message.mentions.members.first();
       kickMember.kick();
       const embed = {
