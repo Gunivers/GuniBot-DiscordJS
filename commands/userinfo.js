@@ -4,6 +4,8 @@ const status = {
     dnd: "ne pas deranger",
     offline: "Offline/Invisible"
   };
+  
+const moment = require("moment");
 
   exports.run = (bot, message, args, Discord) => {
     const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
@@ -19,10 +21,19 @@ const status = {
             desc = "Oui?"
         } else if(member.user.id === '193819725007028224' ) {
             desc = "Grenouille bleue, ninja, et surtout FOLLE!"
-      } else {
+        } else if(member.user.id === '218151795149504513' ) {
+        desc = "Un pigeon random"
+        } else if(member.user.id === '250279569754423297' ) {
+        desc = "Un dragon avec un cœur aussi grand que sa mère patrie"
+        } else {
           desc = "un random"
       }
     var CreatedAt = new Date(member.user.createdTimestamp).toUTCString().split(' ')
+    var JoinedAt = moment.utc(member.joinedAt).format("dddd Do MMMM YYYY, HH:mm:ss")
+    var date = moment().get('date');
+    var a = moment([JoinedAt]);
+    var b = moment([date]);
+    var JourDepuis = a.from(b);  
     if(CreatedAt[0] === "Mon,"){
         var jour = CreatedAt[0].replace("Mon,","Lundi")
     }
@@ -80,9 +91,8 @@ const status = {
     if(CreatedAt[2] === "Dec"){
         var mois = CreatedAt[2].replace("Dec","Decembre")
     }
-    if (!member) return msg.reply("Please provide a vaild Mention or USER ID");
     const embed = {
-        "color": 0xFF6400,
+        "color": 0xFF0000,
         "thumbnail": {
             "url": avatar
         },
@@ -111,6 +121,10 @@ const status = {
                 "value": jour + ' ' + CreatedAt[1] + ' ' + mois + ' ' + CreatedAt[3] + ' à ' + CreatedAt[4]
             },
             {
+                "name": "Rejoins le :",
+                "value": JoinedAt + `\nAncienneté ` + "un certain nombre de" + " jours"
+            },
+            {
                 "name": "Roles",
                 "value": member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).join(" **|** ") 
             },
@@ -121,4 +135,5 @@ const status = {
         ]
     };
     message.channel.send({ embed });
+    message.delete()
   };
