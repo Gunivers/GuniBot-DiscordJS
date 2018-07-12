@@ -6,11 +6,13 @@ exports.run = (bot, message, args, member) => {
         random = 0
     }
 
-    if (random <= 50) {
+    if (random <= 45) {
         random = args[0]
-    } else if (random >= 50) {
+    } else if (random >= 45 && random <= 90) {
         random = args[1] 
-    }
+    } else if (random >= 91) {
+		random = "de laisser le dieu <@250279569754423297> repondre a ma place"
+	}
     message.channel.send({
         embed: {
             color: 0xFF0000,

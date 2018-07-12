@@ -1,24 +1,20 @@
-exports.run = (bot, message, args, member) => {
+exports.run = async (client, message, args, level) => {
+  if(args.length == 0) return message.channel.send(`L'inversion du vide n'a pas encore été scientifiquement approuvé. Usage : \`${message.settings.prefix}reverse [phrase]\``);
+  content = args.join(' ');
+  return message.channel.send(content.split('').reverse().join(''));
+}
 
-		var text = message.content.substring(1);
-        var text2 = text.replace("reverse"," ")
-        
+exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  log: false,
+  aliases: [],
+  permLevel: "User" // "User" "Mod" "Admin" "Server Owner" "Bot Support" "Bot Admin" "Bot Owner"
+}
 
-		var reversed = '';
-		var i = text2.length;
-		
-		while (i > 0) {
-			reversed += text2.substring(i - 1, i);
-			i--;
-		}
-		const embed = {
-			"color": 0xFF6400,
-			"fields": [
-				{
-					"name": "Message renversé :",
-					"value": reversed
-				}
-			]
-		};
-		message.channel.send({ embed });
+exports.help = {
+  name: "reverse",
+  category: "Divers", // "Divers" "Moderation" "Système"
+  description: "Le nom dit tout ...",
+  usage: "reverse [phrase]"
 }

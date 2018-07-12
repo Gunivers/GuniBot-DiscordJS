@@ -1,0 +1,18 @@
+exports.run = async (client, message, args, level) => {
+
+}
+
+exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  log: false,
+  aliases: [],
+  permLevel: "User" // "User" "Mod" "Admin" "Server Owner" "Bot Support" "Bot Admin" "Bot Owner"
+}
+
+exports.help = {
+  name: "",
+  category: "", // "Divers" "Moderation" "Système"
+  description: "",
+  usage: ""
+}

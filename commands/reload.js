@@ -1,64 +1,26 @@
-const role = require('./role.json')
+exports.run = async (client, message, args, level) => {// eslint-disable-line no-unused-vars
+  if (!args || args.length < 1) return message.reply("Vous devez fournir une commande à recharger. Derp.");
 
-exports.run = (bot, message, args, member) => {
-  if(message.member.roles.has(role.admin)) {
-    if(!args || args.size < 1){
-      const embed = {
-        "color": 0xFF6400,
-        "fields": [
-            {
-                "name": "Information",
-                "value": "Donner une commande a reload"
-            }
-        ]
-    };
-    message.channel.send({ embed });
-  }
-    delete require.cache[require.resolve(`./${args[0]}.js`)];
-    const embed = {
-      "color": 0xFF6400,
-      "fields": [
-          {
-              "name": "Information",
-              "value": "la commande a bien été reload"
-          }
-      ]
-  };
-  message.channel.send({ embed });
-  } else if(message.member.roles.has(role.modo)) {
-    if(!args || args.size < 1){
-      const embed = {
-        "color": 0xFF6400,
-        "fields": [
-            {
-                "name": "Information",
-                "value": "Donner une commande a reload"
-            }
-        ]
-    };
-    message.channel.send({ embed });
-    }
-    delete require.cache[require.resolve(`./${args[0]}.js`)];
-    const embed = {
-      "color": 0xFF6400,
-      "fields": [
-          {
-              "name": "Information",
-              "value": "La commande a bien été reload"
-          }
-      ]
-  };
-  message.channel.send({ embed });
-  } else {
-    const embed = {
-      "color": 0xFF6400,
-      "fields": [
-          {
-              "name": "Information",
-              "value": "Tu n'a pas la perm d'utiliser cette commande"
-          }
-      ]
-  };
-  message.channel.send({ embed });
-  }
-  };
+  let response = await client.unloadCommand(args[0]);
+  if (response) return message.reply(`Erreur lors du déchargement : ${response}`);
+
+  response = client.loadCommand(args[0]);
+  if (response) return message.reply(`Erreur lors du chargement : ${response}`);
+
+  message.reply(`La commande \`${args[0]}\` a été rechargée.`);
+};
+
+exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  log: false,
+  aliases: [],
+  permLevel: "Bot Admin"
+};
+
+exports.help = {
+  name: "reload",
+  category: "Système",
+  description: "Recharge une commande qui a été modifiée.",
+  usage: "reload [commande]"
+};

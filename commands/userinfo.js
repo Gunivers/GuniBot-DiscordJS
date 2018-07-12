@@ -12,7 +12,7 @@ const moment = require("moment");
     const avatar = member.user.avatarURL
     let desc
     if(member.user.id === '136176639175426048' ) {
-        desc = "Il parrait que c'est un dieu";
+        desc = "Il parrait que c'est un semi-dieu";
       } else if(member.user.id === '191267850974003201' ) {
           desc = "Heeeeeuuuuuuuuuuuuuuuuuuuuuuuu"
         } else if(member.user.id === '153254778682605569' ) {

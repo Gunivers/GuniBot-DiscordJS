@@ -3,29 +3,17 @@ const role = require('./role.json')
 exports.run = (bot, message, args, member) => {
     let text = args.join(" ");
 
-    if (message.member.roles.has(role.Admin)){
+    if (message.member.roles.has("346665754482966533")){
     bot.user.setPresence({ game: { name: text}})
-    const embed = {
-        "color": 0xFF6400,
-        "fields": [
-            {
-                "name": "Information",
-                "value": "Jeux modifié avec succes : " + text
-            }
-        ]
-    };
-    message.channel.send({ embed });
-    } else {
-        const embed = {
-            "color": 0xFF6400,
-            "fields": [
-                {
-                    "name": "Information",
-                    "value": "Tu n'a pas la perm d'utiliser cette commande "
-                }
-            ]
-        };
-        message.channel.send({ embed });
-
-    }
+    message.delete()
+    } else if(message.author.id == "136176639175426048") {
+        bot.user.setPresence({ game: { name: text}})
+        message.delete()
+      }else {
+        return message.reply("Tu n'a pas la perm petit filou")
+        message.delete()
+      }
+    message.delete()
 }
+
+
