@@ -3,27 +3,27 @@
 // goes `client, other, args` when this function is run.
 const Discord = require("discord.js");
 const schedule = require('node-schedule');
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
   // It's good practice to ignore other bots. This also makes your bot ignore itself
   // and not get into a spam loop (we call that "botception").
   if (message.author.bot) return;
   
  if(message.channel.id == "466352627488391168"){
-	 if(message.content == "Ave Gunivers creaturi te salutant"){
-		 var member = message.guild.members.get(message.author.id)
-		 member.addRole("465881318354583553")
-		 const embed = new Discord.RichEmbed()
-			.setDescription("(FR) Merci d'avoir lu les informations. Profitez bien !\n\n(EN) Thank you for reading the informations. Enjoy the community !")
-		 member.send(embed)
-		message.delete() 
-	 }
+	 if(message.content == "Ave Gunivers creaturi te salutant") MessageDetection(message, Discord)
+	 if(message.content == "`Ave Gunivers creaturi te salutant`") MessageDetection(message, Discord)
+	let messages = await message.channel.fetchMessages({limit: 2});
+	messages = messages.array().filter(m=>m.author.id === "376723809790853140");
+    messages.length = 1;
+  
+  messages.map(async m => await m.delete().catch(console.error));
+	 message.channel.send(" (FR) __**Bienvenue sur GUNIVERS !**__\n- Avant de commencer, merci de prendre connaissance du salon <#379320865533198336> \n\n(EN) **__Welcome to GUNIVERS!__**\n- Before you begin, please read the <#379334985943089154>");
 	
  }
  var allchannel = ['379307107733864448', '435518833533386753']
  for (var i = 0; i < allchannel.length; i++) {
  if(message.channel.parentID == allchannel[i]){
 	 var test
-	 var allrolename = ['Builder 🔨', 'test', 'Decorator 🛋', 'Writer ✒', 'Dev 💻', 'Tester 🗡', 'YouTuber 📽', 'Com-Manager 📢', 'Graphic-Artist 🖌', 'Modeler 🗿', 'Dev-CMD ⚙️', 'Terraformer 🏔', 'Scenarist 📜', 'Player 🎮']
+	 var allrolename = ['Builder ðŸ”¨', 'test', 'Decorator ðŸ›‹', 'Writer âœ’', 'Dev ðŸ’»', 'Tester ðŸ—¡', 'YouTuber ðŸ“½', 'Com-Manager ðŸ“¢', 'Graphic-Artist ðŸ–Œ', 'Modeler ðŸ—¿', 'Dev-CMD âš™ï¸', 'Terraformer ðŸ”', 'Scenarist ðŸ“œ', 'Player ðŸŽ®']
 	 for (var i = 0; i < allrolename.length; i++) {
 		try {
 		PermGive(message, allrolename[i]);
@@ -68,7 +68,7 @@ module.exports = (client, message) => {
   // Some commands may not be useable in DMs. This check prevents those commands from running
   // and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly)
-    return message.channel.send("Cette commande n'est pas disponible via messages privés. Veuillez exécuter cette commande dans une guilde.");
+    return message.channel.send("Cette commande n'est pas disponible via messages privÃ©s. Veuillez exÃ©cuter cette commande dans une guilde.");
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
@@ -95,25 +95,40 @@ module.exports = (client, message) => {
 
   // If the command exists, **AND** the user has permission, run it.
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
-  if (cmd.conf.log) client.sendToLogChannel(message, `[CMD](${client.config.permLevels.find(l => l.level === level).name}) [${message.author.username}](${message.author.id}) a utilisé la commande <${cmd.help.name}>`);
+  if (cmd.conf.log) client.sendToLogChannel(message, `[CMD](${client.config.permLevels.find(l => l.level === level).name}) [${message.author.username}](${message.author.id}) a utilisÃ© la commande <${cmd.help.name}>`);
   cmd.run(client, message, args, level);
 };
 function PermGive(message, rolename)
 {
 
 	test = message.mentions.roles.find("name", rolename)
-	var date = Date.now() + 600 * 1000
 		var allrole = ['466681556422098975', '335448839194673152', '335449255839924227', '335455622139215872', '351413297221861399', '374233656232902666', '379315272592523264', '379315826173673472', '379315917797982209', '379316039634124801', '379316070609321984', '379316189219782656', '387019880941223937', '419467691317919745'];
 	   for (var i = 0; i < allrole.length; i++) {
 		   //console.log('test2')
 			if(test.id == allrole[i]){
 			message.channel.overwritePermissions(allrole[i], {SEND_MESSAGES: true}) 
+			var date = Date.now() + 600 * 1000
+			var role 
+			role = allrole[i]
+							try {
 				schedule.scheduleJob(date, function() {
-					message.channel.overwritePermissions(allrole[i], {SEND_MESSAGES: false})
-					message.channel.send("Veuiller vous attribuez le role du projects pour continuer a parler!")
+					console.log("test")
+					message.channel.overwritePermissions(role, {SEND_MESSAGES: false})
+					message.channel.send("Veuiller vous attribuez le role du projet pour continuer a parler!")
 				});
 			
-			}
+			} catch (err) {console.log(err)}
+		   } 
 		}
+}
+
+function MessageDetection(message, Discord)
+{
+	 var member = message.guild.members.get(message.author.id)
+		 member.addRole("465881318354583553")
+		 const embed = new Discord.RichEmbed()
+			.setDescription("(FR) Merci d'avoir lu les informations. Profitez bien !\n\n(EN) Thank you for reading the informations. Enjoy the community !")
+		 member.send(embed)
+		message.delete() 
 }
 
