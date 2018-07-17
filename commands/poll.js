@@ -1,50 +1,43 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args, member) => {
 	
+  var question = args[0]
   let split = ';';
   
   args = args.join(' ').split(split);
   
   for (var i = 0; i < args.length; i++) args[i] = args[i].trim()
 	
-if(!args[0]) return message.channel.send("je ne peut pas creer de poll vide! syntaxe : `/poll nbrchoix ; question ; choix1 ; choix2 ..... choixX` (5 choix max)")
+if(!args[0]) return message.channel.send("je ne peut pas creer de poll vide! syntaxe : `/choose question ; choix1 ; choix2 ..... choixX`")
+
+	  if(!args[0]) return message.reply("Tu doit mettre une question!")
+		  if(!args[2]) return message.reply("Tu doit mettre 2 choix minimum!")
+			  if(args[16]) return message.reply("Tu doit mettre 15 choix max!")
   
-  var nbrpoll = +args[0]
-  
-   if (!isNumeric(nbrpoll)) {
-    return message.reply(`Desolé mais tu peut pas mettre` + nbrpoll + ` choix! C'est pas un chiffre quoi`);
-  }
-  
-   if (nbrpoll < 2 || nbrpoll > 5) return message.reply('Tu peut mettre seulement entre 2 et 5 choix');
-  
-  if(!args[1]) return message.reply("Tu doit mettre une question!")
-	  if(!args[2]) return message.reply("Tu doit mettre des choix!")
-		  if(!args[3]) return message.reply("Tu doit mettre 2 choix minimum!")
-  
-  
-  var choix
-  
-if(nbrpoll == "2") choix = `:one: ${args[2]}\n:two: ${args[3]}`
-if(nbrpoll == "3") choix = `:one: ${args[2]}\n:two: ${args[3]}\n:three: ${args[4]}`
-if(nbrpoll == "4") choix = `:one: ${args[2]}\n:two: ${args[3]}\n:three: ${args[4]}\n:four: ${args[5]}`
-if(nbrpoll == "5") choix = `:one: ${args[2]}\n:two: ${args[3]}\n:three: ${args[4]}\n:four: ${args[5]}\n:five: ${args[6]}`
+
+var choix = question
+var reaction = ["ptdr", ":zero:", ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":regional_indicator_a:", ":regional_indicator_b:", ":regional_indicator_c:", ":regional_indicator_d:", ":regional_indicator_e:"]
+ for (var i = 1; i < args.length; i++) {
+	 var diffchoix = []
+	 diffchoix.push(args[i])
+	 choix = choix + `\n${reaction[i]}${args[i]}` 
+ }
   
   var member = message.guild.members.get(message.author.id)
-
+  
 	const embed = new Discord.RichEmbed()
 			.setColor(member.displayHexColor)
-			.setTitle(args[1])
 			.setDescription(choix)
-			.setFooter("Poll de " + message.author.tag)
+			.setFooter("Demande de " + message.author.tag)
 			.setTimestamp()
 
 	
  const msgInter = await message.channel.send(embed);
-  await msgInter.react("\u0031\u20E3");
-  await msgInter.react("\u0032\u20E3");
-  if(nbrpoll >= "3") await msgInter.react("\u0033\u20E3"); 
-  if(nbrpoll >= "4") await msgInter.react("\u0034\u20E3");
-  if(nbrpoll >= "5") await msgInter.react("\u0035\u20E3");
+ 
+  var reactionlist = ["ptdr", "\u0030\u20E3", "\u0031\u20E3", "\u0032\u20E3", "\u0033\u20E3", "\u0034\u20E3", "\u0035\u20E3", "\u0036\u20E3", "\u0037\u20E3", "\u0038\u20E3", "\u0039\u20E3", "🇦", "🇧", "🇨", "🇩", "🇪"]
+  for (var i = 1; i < args.length; i++) {
+  await msgInter.react(reactionlist[i]);
+  }
   
 }
 
