@@ -24,8 +24,8 @@ if(args[0] == "name" ){
 			request(url, function(err, response, body) {
 				body = JSON.parse(body)
 				var namehistorique = "Historique des nom :"
-				for (var i = 0; i < body.length; i++){
-					if(i !== 0) namehistorique = namehistorique + "\n\n`" + body[i].name + "`, Pseudo mis le " + moment(new Date (body[i].changedToAt).toISOString()).format("dddd Do MMMM YYYY Ã  HH:mm")
+				for (let i = 0; i < body.length; i++){
+					if(i !== 0) namehistorique = namehistorique + "\n\n`" + body[i].name + "`, Pseudo mis le " + moment(new Date (body[i].changedToAt).toISOString()).format("dddd Do MMMM YYYY à HH:mm")
 				    if (i == 0) namehistorique = namehistorique + "\n\n`" + body[i].name + "`, Pseudo actuel"
 			}
 			const embed = new Discord.RichEmbed()
@@ -54,15 +54,15 @@ if(args[0] == "name" ){
 			var regex = /\b(green)\b/g;
 			var regex1 = /\b(yellow)\b/g;
 			var regex2 = /\b(red)\b/g;
-			status = status.replace(regex, "ðŸ”µ")
-			status = status.replace(regex1, "ðŸ”´")
-			status = status.replace(regex2, "âš«")
+			status = status.replace(regex, "🔵")
+			status = status.replace(regex1, "🔴")
+			status = status.replace(regex2, "⚫")
 			
 			  
 			  const embed = new Discord.RichEmbed()
 			    .setAuthor("Minecraft/Mojang Status", "https://images-ext-2.discordapp.net/external/kJlGHWJ6b37N0UioK2DAf06MLaESzL7j-DWL-my9sE8/https/pbs.twimg.com/profile_images/623422129502056448/9ehvGDEy.png")
                 .setColor(m.displayHexColor)
-				.setDescription(status + "\n\nðŸ”µ = service normal, ðŸ”´ = quelque problÃ¨me , âš« = service mort")
+				.setDescription(status + "\n\n🔵 = service normal, 🔴 = quelque problème , ⚫ = service mort")
 				.setThumbnail("https://images-ext-2.discordapp.net/external/kJlGHWJ6b37N0UioK2DAf06MLaESzL7j-DWL-my9sE8/https/pbs.twimg.com/profile_images/623422129502056448/9ehvGDEy.png")
 				.setFooter("API : https://status.mojang.com/check")
 				.setTimestamp()
@@ -71,10 +71,10 @@ if(args[0] == "name" ){
 	 })
 	
 }else if(args[0] == "tete"){
-	if(!args[1]) return message.channel.send("Indique le joueur dont tu veux voir la tÃªte, " + syntaxe)
+	if(!args[1]) return message.channel.send("Indique le joueur dont tu veux voir la tête, " + syntaxe)
 		var playerhead = "https://cravatar.eu/helmhead/" + args[1] + ".png"
 		try{
-	message.channel.send(`\`${args[1]}\` tÃªte`, {
+	message.channel.send(`\`${args[1]}\` tête`, {
 	files : [playerhead]
 	})
 		} catch (err) {message.channel.send("Ce joueur n'existe pas!")}
@@ -113,30 +113,30 @@ if (!args[2]) {
 			
             body = JSON.parse(body);
 			if (!args[2]) {
-				if(body.error) return message.channel.send("Le serveur `" + mcIP + "` n'est pas allumÃ© ")
-			} else if(body.error) return message.channel.send("Le serveur `" + mcIP + ":" + mcPort + "` n'est pas allumÃ© ")
+				if(body.error) return message.channel.send("Le serveur `" + mcIP + "` n'est pas allumé ")
+			} else if(body.error) return message.channel.send("Le serveur `" + mcIP + ":" + mcPort + "` n'est pas allumé ")
 			var Joueur
 		    var JoueurCo = body.players.sample
 			if(body.players.sample.length == 1){
 			Joueur = JoueurCo[0].name
 			} else if(body.players.sample.length >= 2) {
 			Joueur = JoueurCo[0].name
-			for (var i = 1; i < JoueurCo.length; i++){
+			for (let i = 1; i < JoueurCo.length; i++){
 				Joueur = Joueur + ", " + JoueurCo[i].name
 			}
 			} else {
 				if(body.players.online == "0") {
 					Joueur = "Personne"
-				} else Joueur = "CachÃ©e"
+				} else Joueur = "Cachée"
 			}
 			
-			var regex = /Â§\w/g;
+			var regex = /§\w/g;
   
   const embed = new Discord.RichEmbed()
     .setColor(m.displayHexColor)
 	.addField("Version", body.version.name, true)
 	.addField("Nombre de joueurs", `${body.players.online}/${body.players.max}`, true)
-	.addField("Liste des joueurs connectÃ©s", Joueur)
+	.addField("Liste des joueurs connectés", Joueur)
 	.addField("Latence", body.latency, true)
 	.addField("Description", body.description.replace(regex, " "), true)
 	.setFooter("From api.minetools.eu")
