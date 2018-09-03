@@ -56,6 +56,31 @@ client.memes = new Enmap({
     name: "memes"
   })
 });
+client.rolereact = new Enmap({
+  provider: new EnmapSqlite({
+    name: "rolereact"
+  })
+});
+client.love = new Enmap({
+  provider: new EnmapSqlite({
+    name: "love"
+  })
+});
+client.reaction = new Enmap({
+  provider: new EnmapSqlite({
+    name: "reaction"
+  })
+});
+client.voteban = new Enmap({
+  provider: new EnmapSqlite({
+    name: "voteban"
+  })
+});
+client.antilien = new Enmap({
+  provider: new EnmapSqlite({
+    name: "antilien"
+  })
+});
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.

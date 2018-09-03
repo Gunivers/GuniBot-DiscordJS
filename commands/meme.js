@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => {
     client.memes.set(key, {});
   }
   if (!args[0]) return message.channel.send(`Indiquez un nom de meme. Usage : \`${message.settings.prefix}meme [nom]\``);
-  var meme = client.memes.getProp(key, args[0].toLowerCase());
+  var meme = client.memes.getProp(key, args[0]);
   var memename
   if(!meme){
 	  meme = "https://cdn.discordapp.com/attachments/369148909345308682/432104268493750292/11fjj7.jpg";

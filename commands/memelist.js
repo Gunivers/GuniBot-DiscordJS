@@ -7,7 +7,15 @@ exports.run = async (client, message, args, level) => {
 
   var memes = Object.keys(client.memes.get(key));
   memes.sort();
-  return message.channel.send(`Liste des meme :\n${memes.toString().replace(/[,]/g, ' - ')}`);
+ // return message.channel.send(`Liste des meme :\n\`${memes.toString().replace(/[,]/g, '` - `')}\``);
+  		return message.channel.send(`= Liste des meme =\n\n\- ${memes.toString().replace(/[,]/g, `\n\-\ `)}`, {
+      code: "asciidoc",
+      split: {
+        char: "\u200b"
+      }
+    }).catch(function(err) {
+      client.logger.error(err);
+    });
 }
 
 exports.conf = {

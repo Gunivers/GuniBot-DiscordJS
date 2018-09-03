@@ -14,6 +14,19 @@ exports.run = async (client, message, args, level) => {
   var loveMeter = Math.floor((Math.random() * 10) + 1);
   var redCircle = '💖';
   var whiteCircle = '🖤';
+  
+    const key = `${message.guild.id}-love`;
+  if (!client.love.has(key)) {
+    client.love.set(key, {});
+  }
+  
+    var love = client.love.getProp(key, `${message.author.id}-${member.id}`);
+	if(!love){
+	client.love.setProp(key, `${message.author.id}-${member.id}`, loveMeter);
+	client.love.setProp(key, `${member.id}-${message.author.id}`, loveMeter);
+	} else {
+		loveMeter = love
+	}
 
   var returnTable = [
     '1-10% Vous n\'êtes pas de très bons amis :(',

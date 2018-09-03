@@ -26,7 +26,7 @@ if(args[0] == "name" ){
 				var namehistorique = "Historique des nom :"
 				for (let i = 0; i < body.length; i++){
 					if(i !== 0) namehistorique = namehistorique + "\n\n`" + body[i].name + "`, Pseudo mis le " + moment(new Date (body[i].changedToAt).toISOString()).format("dddd Do MMMM YYYY à HH:mm")
-				    if (i == 0) namehistorique = namehistorique + "\n\n`" + body[i].name + "`, Pseudo actuel"
+				    if (i == 0) namehistorique = namehistorique + "\n\n`" + body[i].name + "`, Premier pseudo"
 			}
 			const embed = new Discord.RichEmbed()
 			    .setColor(m.displayHexColor)
@@ -122,7 +122,8 @@ if (!args[2]) {
 			} else if(body.players.sample.length >= 2) {
 			Joueur = JoueurCo[0].name
 			for (let i = 1; i < JoueurCo.length; i++){
-				Joueur = Joueur + ", " + JoueurCo[i].name
+				var reg = /(_)/g;
+				Joueur = Joueur + ", " + JoueurCo[i].name.replace(reg, "\_")
 			}
 			} else {
 				if(body.players.online == "0") {
@@ -138,7 +139,7 @@ if (!args[2]) {
 	.addField("Nombre de joueurs", `${body.players.online}/${body.players.max}`, true)
 	.addField("Liste des joueurs connectés", Joueur)
 	.addField("Latence", body.latency, true)
-	.addField("Description", body.description.replace(regex, " "), true)
+	.addField("Description", body.description.replace(regex, ""), true)
 	.setFooter("From api.minetools.eu")
 	.setTimestamp()	
 	
@@ -166,6 +167,6 @@ exports.conf = {
 exports.help = {
   name: "mc",
   category: "Divers",
-  description: "Obtenir les info d'un serveur mc",
+  description: "Obtenir les info de quelque chose en rapport avec mc",
 usage: "mcserver (server/status) [serveur ip] [server port]"
 };

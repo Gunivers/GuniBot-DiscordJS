@@ -1,20 +1,19 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args, member) => {
 	
-  var question = args[0]
   let split = ';';
   
   args = args.join(' ').split(split);
   
   for (var i = 0; i < args.length; i++) args[i] = args[i].trim()
 	
-if(!args[0]) return message.channel.send("je ne peut pas creer de poll vide! syntaxe : `/choose question ; choix1 ; choix2 ..... choixX`")
+if(!args[0]) return message.channel.send("je ne peux pas créer de sondage vide! Syntaxe : `/poll question ; choix1 ; choix2 ..... choixX`")
 
 	  if(!args[0]) return message.reply("Tu doit mettre une question!")
 		  if(!args[2]) return message.reply("Tu doit mettre 2 choix minimum!")
 			  if(args[16]) return message.reply("Tu doit mettre 15 choix max!")
   
-
+var question = args[0]
 var choix = question
 var reaction = ["ptdr", ":zero:", ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":regional_indicator_a:", ":regional_indicator_b:", ":regional_indicator_c:", ":regional_indicator_d:", ":regional_indicator_e:"]
  for (var i = 1; i < args.length; i++) {

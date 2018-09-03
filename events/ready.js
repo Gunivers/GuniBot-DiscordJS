@@ -12,13 +12,13 @@ module.exports = async client => {
   //on supprime les derniers message
   await channel.fetchMessages({limit: 6});
   
-
- schedule.scheduleJob('0 0 11 * * *', function() {
-	var channel1 = client.channels.get('466352627488391168')
-	channel1.send(" (FR) __**Bienvenue sur GUNIVERS !**__\n- Avant de commencer, merci de prendre connaissance du salon <#379320865533198336> \n- Tu peux t'ajouter/retirer des rôles via le salon <#464519401702424577> \n- Participe à des évènements, projets ou simplement aux discussions pour évoluer dans la communauté ! :wink: \n\n(EN) **__Welcome to GUNIVERS!__**\n- Before you begin, please read the <#379334985943089154> \n- You can add/remove your own roles via the <#464519401702424577> channel\n- Participate in events, projects or simply discussions to evolve in the community! :wink:");
- console.log("test")
- });
+  var lovereset = schedule.scheduleJob('0 18 * * 0', function() {
+	  client.love.delete("125723125685026816-love")
+	  channel = client.channels.get('378606556276719616')
+	  channel.send("Love reset")
+  })
   
+
 };
 // ════╣ L A N G U A G E S ╠════\n🇫🇷 Français\n🇬🇧 English
 

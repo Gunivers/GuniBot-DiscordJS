@@ -1,7 +1,7 @@
 module.exports = async (client, message) => {
   const settings = message.settings = client.getGuildSettings(message.guild);
-  const logChannel = message.guild.channels.find('name', client.getGuildSettings(message.guild).modLogChannel);
-  if(!logChannel) return;
+  const logChannel = message.guild.channels.find('name', "logs");
+  //if(!logChannel) return;
 
   if(message.channel.id == logChannel.id) return;
 
@@ -13,9 +13,13 @@ module.exports = async (client, message) => {
       ignore = true;
   }
   if(ignore) return;
-
+ try {
   content = `Un message de <${message.author.username}> dans le channel <${message.channel.name}> a été supprimé.\n> ${message.cleanContent}`;
-  client.sendToLogChannel(message, content);
+  logChannel.send(content, {
+      code: "markdown",
+      split: true
+    });
+ } catch (err) {console.log(err)}
 }
 
 

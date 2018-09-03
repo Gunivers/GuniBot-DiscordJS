@@ -26,7 +26,7 @@ exports.conf = {
 
 exports.help = {
   name: "report",
-  category: "Moderation", // "Divers" "Moderation" "Système"
+  category: "Modération", // "Divers" "Moderation" "Système"
   description: "Reporter un non respect des regle",
   usage: "report [personne] [raison]"
 }

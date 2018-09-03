@@ -24,7 +24,7 @@ exports.conf = {
   guildOnly: true,
   log: false,
   aliases: [],
-  permLevel: "Mod" // "User" "Mod" "Admin" "Server Owner" "Bot Support" "Bot Admin" "Bot Owner"
+  permLevel: "PTDR" // "User" "Mod" "Admin" "Server Owner" "Bot Support" "Bot Admin" "Bot Owner"
 };
 
 exports.help = {

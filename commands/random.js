@@ -5,10 +5,10 @@ exports.run = async (client, message, args, member) => {
     await message.guild.members.forEach(member => {
       candidates.push(member)
     });
-    var randomUser = candidates[Math.floor(Math.random() * candidates.length)];
-
-
-    message.channel.send(`L'heureux choisi du random est ${randomUser.user.tag}`)
+	
+	if(args[0] == "poke"){
+		message.channel.send(`L'heureux élu du random est ${candidates[Math.floor(Math.random() * candidates.length)]}`)
+	} else return message.channel.send(`L'heureux élu du random est ${candidates[Math.floor(Math.random() * candidates.length)].user.tag}`)
 }
 
 exports.conf = {

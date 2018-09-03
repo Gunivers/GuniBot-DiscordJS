@@ -7,7 +7,7 @@ exports.run = async (client, message, args, level) => {
 
   const key = `${message.guild.id}-${member.id}`;
 
-  var muteID = '423228044376014858';
+  var muteID = '478308026806173733';
   if (member.roles.has(muteID)) {
     //il est mute donc on le démute
     let roles = client.usersDB.getProp(key, 'rolesB4Mute');
@@ -35,6 +35,7 @@ exports.run = async (client, message, args, level) => {
   client.usersDB.setProp(key, 'rolesB4Mute', roles);
   member.setRoles(new Array(muteID));
   client.sendToLogChannel(message, `- [MUTE] pour ${member.displayName} (${member.id})\n+ Appliqué par ${message.member.displayName}\n*** ${reason}`, 'diff');
+  message.channel.send( member.displayName + "a été réduit au silence")
   return member.user.send(`- [MUTE en provenance de ${message.guild.name}]\nDe ${message.member.displayName}\n${reason}`, {
     code: 'diff'
   }).catch(function(err) {

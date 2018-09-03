@@ -2,6 +2,67 @@ const Discord = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 moment.locale('fr');
+
+moment.updateLocale('fr', {
+  durationLabelsStandard: {
+    S: 'milliseconde',
+    SS: 'millisecondes',
+    s: 'seconde',
+    ss: 'secondes',
+    m: 'minute',
+    mm: 'minutes',
+    h: 'heure',
+    hh: 'heures',
+    d: 'jour',
+    dd: 'jours',
+    w: 'semaine',
+    ww: 'semaines',
+    M: 'mois',
+    MM: 'mois',
+    y: 'an',
+    yy: 'ans'
+  },
+  durationLabelsShort: {
+    S: 'msec',
+    SS: 'msecs',
+    s: 'sec',
+    ss: 'secs',
+    m: 'min',
+    mm: 'mins',
+    h: 'hr',
+    hh: 'hrs',
+    d: 'jr',
+    dd: 'jrs',
+    w: 'sem',
+    ww: 'sems',
+    M: 'mois',
+    MM: 'mois',
+    y: 'an',
+    yy: 'ans'
+  },
+  durationTimeTemplates: {
+    HMS: 'h:mm:ss',
+    HM: 'h:mm',
+    MS: 'm:ss'
+  },
+  durationLabelTypes: [{
+      type: "standard",
+      string: "__"
+    },
+    {
+      type: "short",
+      string: "_"
+    }
+  ],
+  durationPluralKey: function(token, integerValue, decimalValue) {
+    // Singular for a value of `1`, but not for `1.0`.
+    if (integerValue === 1 && decimalValue === null) {
+      return token;
+    }
+
+    return token + token;
+  }
+});
 const status = {
   online: "En ligne",
   idle: "Absent",
@@ -20,10 +81,18 @@ exports.run = (client, message, args, level) => {
   }
   const key = `${message.guild.id}-${member.id}`;
   if (!client.usersDB.has(key)) {
-    client.addUserToDB(key);
+    if (!client.usersDB.has(key)) {
+    client.usersDB.set(key, {
+      user: member.id,
+      guild: message.guild.id,
+      points: 0,
+      level: 1
+    });
+	}
   }
   var userDesc = client.usersDB.getProp(key, 'userDesc');
   if (!userDesc) {
+	  userDesc = "Someone, a random"
 	  if(member.roles.has("356220216084004897")) userDesc = "Basically, they're a noob."
 	  if(member.roles.has("448124982900555776")) userDesc = "They mostly spoke in the global channel. This specie is the nearest from flooders."
 	  if(member.roles.has("448125392511827978")) userDesc = "They were once active, but have now fallen into the speechless death."
@@ -39,11 +108,11 @@ exports.run = (client, message, args, level) => {
     .addField("Statut :", `${status[member.user.presence.status]}`, true)
     .addField("Joue à :", `${member.user.presence.game ? `${member.user.presence.game.name}` : "rien."}`, true)
     .addField("Compte créé le :", `${moment(member.user.createdAt).format("dddd Do MMMM YYYY à HH:mm:ss")}`, true)
-    .addField("Ancienneté :", `${stotime((Date.now()-member.user.createdAt)/1000)}`, true)
+    .addField("Ancienneté :", `${moment.duration(Date.now()-member.user.createdAt).format("Y __, M __, D __, hh:mm:ss")}`, true)
     .addField("Guilde rejointe le :", `${moment(member.joinedAt).format("dddd Do MMMM YYYY à HH:mm:ss")}`, true)
-    .addField("Ancienneté :", `${stotime((Date.now()-member.joinedAt)/1000)}`, true)
-    .addField("Roles", `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).join(" **|** ") || "Pas de rôles"}`)
-    .setFooter(userDesc);
+    .addField("Ancienneté :", `${moment.duration(Date.now()-member.joinedAt).format("Y __, M __, D __, hh:mm:ss")}`, true)
+	.addField(`Roles [${member.roles.size - 1}]`, `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).join(" **|** ") || "Pas de rôles"}`)
+    .setFooter(`${userDesc} | ${client.usersDB.getProp(key, "points")} points, Level ${client.usersDB.getProp(key, "level")}`);
 
   if (!member.user.avatarURL) {
 	embed.setThumbnail("https://pbs.twimg.com/profile_images/1016814904383139840/2CdaitAm_400x400.jpg")
@@ -72,12 +141,3 @@ exports.help = {
   description: "Affiche les informations d'un membre",
   usage: "user <membre>"
 };
-
-function stotime(seconds) {
-  var days = Math.floor(seconds / (24 * 60 * 60));
-  seconds -= days * (24 * 60 * 60);
-  var hours = Math.floor(seconds / (60 * 60));
-  seconds -= hours * (60 * 60);
-  var minutes = Math.floor(seconds / 60) + 1;
-  return ((0 < days) ? (days + " jours ") : "") + ((0 < hours) ? (hours + " heures ") : "") + minutes + " minutes";
-}

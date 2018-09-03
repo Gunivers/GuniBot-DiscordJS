@@ -18,6 +18,6 @@ module.exports = (client, member) => {
   // Send the welcome message to the welcome channel
   // There's a place for more configs here.
     member.createDM().then(channel => {
-    return channel.send(" (FR) Bienvenue sur GUNIVERS " + member.displayName + " !\n- Avant de commencer, merci de prendre connaissance du salon #information-fr:pushpin: \n- Tu peux t'ajouter/retirer des rôles via le salon #roles \n- Participe à des évènements, projets ou simplement aux discussions pour évoluer dans la communauté ! :wink: \n\n(EN) Welcome to GUNIVERS " + member.displayName + " !\n- Before you begin, please read the #information-en:pushpin: \n- You can add/remove your own roles via the #roles channel\n- Participate in events, projects or simply discussions to evolve in the community! :wink:");
+    return channel.send(`(FR) __**Bienvenue sur GUNIVERS ${member} !**__\nVous n'avez accès qu'au salon Lobby pour le moment. Pour débloquer l'accès au reste du Discord, lisez les instructions présentes dans le salon Informations :wink:\n\n(EN) __**Welcome to GUNIVERS ${member} !**__\nYou only have access to the Lobby channel. To unlock the acess to the rest of our Discord, please follow the instructions in the Informations channel :wink:`);
   }).catch(console.error)
 };

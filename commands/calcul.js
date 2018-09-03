@@ -1,6 +1,7 @@
 var math = require('mathjs');
 
 exports.run = (client, message, args, member) => {
+	if(!args[0]) return message.channel.send("Je ne peut pas faire de calcul vide")
 	try {	
 		(message.channel.send("Le résultat du calcul `" + args.join(' ') + "` est `" + math.eval(args.join(' ')) + "`"));
 	} catch (err) {

@@ -9,7 +9,7 @@ const config = {
   "support": ["316300744556937217"],
 
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
-  "token": "ptdr non",
+  "token": "nop lol",
 
   // Default per-server settings. New guilds have these settings.
 
@@ -43,9 +43,42 @@ const config = {
       // level allows them to.
       check: () => true
     },
+	
+	{ level: 2,
+      // This is the name of the role.
+      name: "Padawan",
+      // The following lines check the guild the message came from for the roles.
+      // Then it checks if the member that authored the message has the role.
+      // If they do return true, which will allow them to execute the command in question.
+      // If they don't then return false, which will prevent them from executing the command.
+      check: (message) => {
+        try {
+          if (message.member.roles.has("448124702666391563")) return true;
+        } catch (e) {
+          return false;
+        }
+      }
+    },
+	
+	{ level: 3,
+      // This is the name of the role.
+      name: "PTDR",
+      // The following lines check the guild the message came from for the roles.
+      // Then it checks if the member that authored the message has the role.
+      // If they do return true, which will allow them to execute the command in question.
+      // If they don't then return false, which will prevent them from executing the command.
+      check: (message) => {
+        try {
+         if (message.member.roles.has("389083826069962752") || message.member.roles.has("351811547116601344") || message.member.roles.has("393355009271660544")) return true;
+        } catch (e) {
+          return false;
+        }
+      }
+    },
+
 
     // This is your permission level, the staff levels should always be above the rest of the roles.
-    { level: 2,
+    { level: 4,
       // This is the name of the role.
       name: "Mod",
       // The following lines check the guild the message came from for the roles.
@@ -62,7 +95,7 @@ const config = {
       }
     },
 
-    { level: 3,
+    { level: 5,
       name: "Admin",
       check: (message) => {
         try {
@@ -74,7 +107,7 @@ const config = {
       }
     },
     // This is the server owner.
-    { level: 4,
+    { level: 6,
       name: "Server Owner",
       // Simple check, if the guild owner id matches the message author's ID, then it will return true.
       // Otherwise it will return false.

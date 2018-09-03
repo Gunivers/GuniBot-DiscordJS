@@ -22,6 +22,6 @@ exports.conf = {
 exports.help = {
   name: "don",
   category: "Divers",
-  description: "Obtenir les lien paypal de mes createurs",
+  description: "Obtenir le patreon de gunivers",
   usage: "don"
 };

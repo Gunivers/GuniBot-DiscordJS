@@ -7,7 +7,7 @@ exports.run = (client, message, args, member) => {
   
   for (var i = 0; i < args.length; i++) args[i] = args[i].trim()
 	
-if(!args[0]) return message.channel.send("je ne peut pas creer de choix vide! syntaxe : `/choose choix1 ; choix2 ..... choixX` (5 choix max)")
+if(!args[0]) return message.channel.send("je ne peut créer de choix vide! syntaxe : `/choose choix1 ; choix2 ..... choixX`")
 
 	  if(!args[0]) return message.reply("Tu doit mettre des choix!")
 		  if(!args[1]) return message.reply("Tu doit mettre 2 choix minimum!")
